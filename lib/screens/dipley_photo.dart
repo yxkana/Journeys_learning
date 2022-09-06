@@ -105,7 +105,7 @@ class _displeyd_photoState extends State<displeyd_photo>
                   },
                   icon: Icon(
                     Icons.arrow_back_rounded,
-                    size: 30,
+                    size: 33,
                     color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
