@@ -306,6 +306,17 @@ class _PlacesGridState extends State<PlacesGrid> with TickerProviderStateMixin {
                                                                   ._places);
                                                           Navigator.of(context)
                                                               .pop();
+
+                                                          ftoast.showToast(
+                                                              child:
+                                                                  JourneyDeleted,
+                                                              toastDuration:
+                                                                  Duration(
+                                                                      seconds:
+                                                                          1),
+                                                              gravity:
+                                                                  ToastGravity
+                                                                      .CENTER);
                                                         }),
                                                         child: Text("Yes")),
                                                     TextButton(

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import './helpers/custom_slider_right.dart';
 import './screens/places.dart';
 import './screens/map.dart';
-import 'screens/jorneys.dart';
-import './screens/profile.dart';
+
+
 
 import 'package:animations/animations.dart';
 import './widgets/add_place_new.dart';

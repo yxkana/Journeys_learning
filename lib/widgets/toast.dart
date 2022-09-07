@@ -23,7 +23,7 @@ Widget toastPhotoAdded = Container(
   ),
 );
 
-Widget toastPlaceAdded = Container(
+Widget toastJourneyAdded = Container(
   padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
   decoration: BoxDecoration(
     borderRadius: BorderRadius.circular(25.0),
@@ -40,7 +40,7 @@ Widget toastPlaceAdded = Container(
         width: 12.0,
       ),
       Text(
-        "Place added",
+        "Journey added",
         style: TextStyle(
             color: Colors.white, fontFamily: "RobotoRegular", fontSize: 16),
       ),
@@ -91,6 +91,31 @@ Widget somethingGotWrong = Container(
       ),
       Text(
         "Something is wrong...",
+        style: TextStyle(
+            color: Colors.white, fontFamily: "RobotoRegular", fontSize: 16),
+      ),
+    ],
+  ),
+);
+
+Widget JourneyDeleted = Container(
+  padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+  decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(25.0),
+    color: Color.fromRGBO(156, 180, 204, 1),
+  ),
+  child: Row(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      Icon(
+        Icons.error_outline_rounded,
+        color: Colors.white,
+      ),
+      SizedBox(
+        width: 12.0,
+      ),
+      Text(
+        "Journey Deleted",
         style: TextStyle(
             color: Colors.white, fontFamily: "RobotoRegular", fontSize: 16),
       ),

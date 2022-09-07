@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:places/home.dart';
 import 'package:places/providers/places_provider.dart';
+import 'package:places/widgets/toast.dart';
 import 'package:provider/provider.dart';
 import 'dart:io';
 import '../widgets/Boxes.dart';
@@ -22,6 +24,7 @@ import '../widgets/grid_photo_widget.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart' as sysPath;
 import 'package:image_picker/image_picker.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Detail_screen extends StatefulWidget {
   static const routeName = "/detail-screen";
@@ -40,6 +43,8 @@ class _Detail_screenState extends State<Detail_screen>
   final _placesBox = Boxes.getPlace();
   bool isSelectedForDelete = false;
 
+  late FToast ftoast;
+
   final TextEditingController _controller = TextEditingController();
   List<String> listForDeletion = [];
   bool _isPressedDeleteActive = false;
@@ -48,12 +53,12 @@ class _Detail_screenState extends State<Detail_screen>
   late Animation<Offset> _slideAnimationDeleteAppBar;
   late AnimationController _controllerDeleteAppBar;
 
-  
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    ftoast = FToast();
+    ftoast.init(context);
     _controller.text = widget.place.title;
     _controllerDeleteAppBar =
         AnimationController(vsync: this, duration: Duration(milliseconds: 150));
@@ -168,6 +173,10 @@ class _Detail_screenState extends State<Detail_screen>
                                 return HomeScreen();
                               },
                             ));
+                            ftoast.showToast(
+                                child: JourneyDeleted,
+                                gravity: ToastGravity.CENTER,
+                                toastDuration: Duration(seconds: 1));
                           }),
                           child: Text("Yes")),
                       TextButton(
@@ -325,14 +334,34 @@ class _Detail_screenState extends State<Detail_screen>
                     ),
                     IconButton(
                         onPressed: () async {
-                          _controllerDeleteAppBar.reverse();
+                          showDialog(
+                              context: context,
+                              builder: ((context) {
+                                return AlertDialog(
+                                  content: Text("Are you sure"),
+                                  actions: [
+                                    TextButton(
+                                        onPressed: (() async {
+                                          _controllerDeleteAppBar.reverse();
 
-                          setState(() {
-                            Provider.of<PlacesProvider>(context, listen: false)
-                                .deletePhotos(widget.place, listForDeletion);
-                            listForDeletion.clear();
-                            isSelectedForDelete = false;
-                          });
+                                          setState(() {
+                                            Provider.of<PlacesProvider>(context,
+                                                    listen: false)
+                                                .deletePhotos(widget.place,
+                                                    listForDeletion);
+                                            listForDeletion.clear();
+                                            isSelectedForDelete = false;
+                                          });
+                                          Navigator.pop(context);
+                                        }),
+                                        child: Text("Yes")),
+                                    TextButton(
+                                        onPressed: (() =>
+                                            Navigator.of(context).pop()),
+                                        child: Text("No"))
+                                  ],
+                                );
+                              }));
                         },
                         icon: Icon(
                           Icons.delete,

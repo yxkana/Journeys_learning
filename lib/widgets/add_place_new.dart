@@ -655,6 +655,11 @@ class _Add_new_PlaceState extends State<Add_new_Place> {
 
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: ((context) => HomeScreen())));
+
+                          ftoast.showToast(
+                              child: toastJourneyAdded,
+                              gravity: ToastGravity.CENTER,
+                              toastDuration: Duration(seconds: 1));
                         }),
                         icon: Icon(
                           Icons.location_city_outlined,
