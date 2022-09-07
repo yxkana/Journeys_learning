@@ -684,9 +684,7 @@ class _Add_new_PlaceState extends State<Add_new_Place> {
               padding: EdgeInsets.all(20),
               child: TextField(
                 onSubmitted: ((value) {
-                  setState(() {
-                    _currentStep = 1;
-                  });
+                  FocusScope.of(context).unfocus();
                 }),
                 textInputAction: TextInputAction.done,
                 style: const TextStyle(
