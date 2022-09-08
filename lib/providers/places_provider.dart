@@ -1,19 +1,12 @@
-import 'dart:typed_data';
-import 'package:flutter/cupertino.dart';
-
-import '../widgets/Boxes.dart';
-import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import 'dart:io';
 
+//Models
 import '../models/place.dart';
-import '../helpers/db_helper.dart';
-import 'dart:convert';
-import '../helpers/Utility.dart';
 
+//Dependencies
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:uuid/uuid.dart';
 
 class PlacesProvider with ChangeNotifier {
   List<Place> _items = [];

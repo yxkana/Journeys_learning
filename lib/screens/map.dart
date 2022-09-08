@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+
+//Dependencies
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:hive/hive.dart';
 import 'package:location/location.dart';
-import 'package:places/models/place.dart';
-import '../widgets/Boxes.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:uuid/uuid.dart';
+
+//Models
+import 'package:places/models/place.dart';
+
+//Widgets
+import '../widgets/Boxes.dart';
 import '../widgets/main_map_widget.dart';
 
 class MapScreen extends StatefulWidget {
@@ -15,7 +19,8 @@ class MapScreen extends StatefulWidget {
   State<MapScreen> createState() => _MapScreenState();
 }
 
-class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixin {
+class _MapScreenState extends State<MapScreen>
+    with AutomaticKeepAliveClientMixin {
   bool get wantKeepAlive => true;
   LatLng userLocation = LatLng(0, 0);
   bool loading = true;
@@ -32,7 +37,7 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
       setState(() {
         userLocation = LatLng(userLoc.latitude!, userLoc.longitude!);
         map.add(Marker(
-            markerId: MarkerId("mark1"),
+            markerId: const MarkerId("mark1"),
             position: LatLng(userLoc.latitude!, userLoc.longitude!)));
         loading = false;
       });
@@ -50,7 +55,7 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
             var marker = box.values.toList().cast<Place>();
 
             return loading
-                ? Center(
+                ? const Center(
                     child: CircularProgressIndicator(),
                   )
                 : mainMap(searchMap, _searchController, userLocation, marker);

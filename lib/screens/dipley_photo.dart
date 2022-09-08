@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/services.dart';
-import 'package:path/path.dart';
-import 'package:photo_view/photo_view_gallery.dart';
 import 'dart:io';
+
+//Dependencies
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:photo_view/photo_view_gallery.dart';
+
+//Models
 import 'package:places/models/place.dart';
 import 'package:photo_view/photo_view.dart';
-import 'package:places/providers/places_provider.dart';
 import 'package:provider/provider.dart';
 
-class displeyd_photo extends StatefulWidget {
+//Provider
+import 'package:places/providers/places_provider.dart';
+
+class Displeyd_photo extends StatefulWidget {
   final String gridPlace;
   final List<String> _gallery;
   final String _id;
@@ -18,14 +21,14 @@ class displeyd_photo extends StatefulWidget {
   final Place _place;
   final Function _function;
 
-  displeyd_photo(this._gallery, this._id, this.index, this.gridPlace,
+  Displeyd_photo(this._gallery, this._id, this.index, this.gridPlace,
       this._place, this._function);
 
   @override
-  State<displeyd_photo> createState() => _displeyd_photoState();
+  State<Displeyd_photo> createState() => _Displeyd_photoState();
 }
 
-class _displeyd_photoState extends State<displeyd_photo>
+class _Displeyd_photoState extends State<Displeyd_photo>
     with SingleTickerProviderStateMixin {
   String tag = "";
   int _currentIndex = 0;
@@ -34,11 +37,8 @@ class _displeyd_photoState extends State<displeyd_photo>
 
   callBack(varIndex) {
     setState(() {
-      print(varIndex);
       widget.index = varIndex;
       _currentIndex = varIndex;
-
-      print(widget.index);
     });
   }
 
@@ -56,8 +56,8 @@ class _displeyd_photoState extends State<displeyd_photo>
     _carouselController = CarouselController();
     _pageController = PageController(initialPage: widget.index);
 
-    _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 150));
+    _animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 150));
 
     _animation = Tween(begin: 1.0, end: 1.17).animate(
         CurvedAnimation(parent: _animationController, curve: Curves.easeIn));
@@ -67,7 +67,7 @@ class _displeyd_photoState extends State<displeyd_photo>
 
   @override
   Widget build(BuildContext context) {
-    final tag = new StringBuffer();
+    final tag = StringBuffer();
     tag.writeAll(["pogo", widget.index]);
 
     return Scaffold(
@@ -81,7 +81,8 @@ class _displeyd_photoState extends State<displeyd_photo>
               },
               pageController: _pageController,
               itemCount: widget._gallery.length,
-              backgroundDecoration: BoxDecoration(color: Colors.transparent),
+              backgroundDecoration:
+                  const BoxDecoration(color: Colors.transparent),
               builder: ((context, index) {
                 return PhotoViewGalleryPageOptions(
                     heroAttributes: PhotoViewHeroAttributes(
@@ -97,7 +98,7 @@ class _displeyd_photoState extends State<displeyd_photo>
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
-                padding: EdgeInsets.only(left: 10, top: 40),
+                padding: const EdgeInsets.only(left: 10, top: 40),
                 child: IconButton(
                   onPressed: () {
                     widget._function();
@@ -111,7 +112,7 @@ class _displeyd_photoState extends State<displeyd_photo>
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(right: 10, top: 40),
+                padding: const EdgeInsets.only(right: 10, top: 40),
                 child: IconButton(
                     onPressed: () {
                       setState(() {
@@ -134,35 +135,34 @@ class _displeyd_photoState extends State<displeyd_photo>
                 alignment: Alignment.bottomLeft,
                 child: CarouselSlider.builder(
                   carouselController: _carouselController,
-                  itemBuilder: (context, index, realIndex) =>
-                      index == _currentIndex
-                          ? Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 2),
-                              child: ScaleTransition(
-                                scale: _animation,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(0)),
-                                  child: Image.file(
-                                    File(widget._gallery[index]),
-                                  ),
-                                ),
+                  itemBuilder: (context, index, realIndex) => index ==
+                          _currentIndex
+                      ? Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 2),
+                          child: ScaleTransition(
+                            scale: _animation,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(0)),
+                              child: Image.file(
+                                File(widget._gallery[index]),
                               ),
-                            )
-                          : GestureDetector(
-                              onTap: () async {
-                                print(index);
-                                _pageController.jumpToPage(index);
-                              },
-                              child: Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(0)),
-                                  margin: EdgeInsets.symmetric(horizontal: 2),
-                                  child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(0),
-                                      child: Image.file(
-                                          File(widget._gallery[index])))),
                             ),
+                          ),
+                        )
+                      : GestureDetector(
+                          onTap: () async {
+                            _pageController.jumpToPage(index);
+                          },
+                          child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(0)),
+                              margin: const EdgeInsets.symmetric(horizontal: 2),
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(0),
+                                  child: Image.file(
+                                      File(widget._gallery[index])))),
+                        ),
                   itemCount: widget._gallery.length,
                   options: CarouselOptions(
                       height: MediaQuery.of(context).size.height * .1,
@@ -171,8 +171,7 @@ class _displeyd_photoState extends State<displeyd_photo>
                       onPageChanged: (index, reason) {
                         setState(() {
                           _currentIndex = index;
-                          print(_currentIndex.toString() + " _currentIndex");
-                          print(index.toString() + " _index");
+
                           _animationController.forward();
                         });
                       },

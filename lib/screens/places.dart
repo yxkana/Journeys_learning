@@ -1,27 +1,27 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-import 'package:hive/hive.dart';
+//Dependencies
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:uuid/uuid.dart';
-import '../widgets/Boxes.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:provider/provider.dart';
+
+//Providers
 import '../providers/places_provider.dart';
+
+//Widgets
+import '../widgets/Boxes.dart';
 import '../widgets/places_widget.dart';
-import '../models/place.dart';
 import '../data/tag_data.dart';
-import '../models/tag_model.dart';
-import 'dart:math';
-import '../data/tags_data_falseModels.dart';
-import './detail_place.dart';
 import '../widgets/searchPlace_widget.dart';
-import 'package:anim_search_bar/anim_search_bar.dart';
-import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart'
-    as insert;
+
+//Models
+import '../models/tag_model.dart';
+import '../models/place.dart';
+
+//Screens
+import './detail_place.dart';
+
+
 
 class Places extends StatefulWidget {
   int searhnumber = 0;
@@ -56,7 +56,7 @@ class _PlacesState extends State<Places> with SingleTickerProviderStateMixin {
 
     _controller = AnimationController(
         vsync: this,
-        duration: Duration(
+        duration: const Duration(
             milliseconds: 200)); //How long will take animation time to finish
     _slideAnimationOfSearch = Tween<Offset>(
             //Tween animation bettween two objects. Změnšovaní nebo zvětšovaní objectu.
@@ -455,7 +455,7 @@ class _PlacesState extends State<Places> with SingleTickerProviderStateMixin {
                                           });
                                         },
                                         child: Padding(
-                                          padding: EdgeInsets.only(left: 22),
+                                          padding: const EdgeInsets.only(left: 22),
                                           child: Align(
                                             alignment: Alignment.topLeft,
                                             child: Text(
@@ -472,7 +472,7 @@ class _PlacesState extends State<Places> with SingleTickerProviderStateMixin {
                                         ),
                                       ),
                                       Padding(
-                                        padding: EdgeInsets.only(right: 22),
+                                        padding: const EdgeInsets.only(right: 22),
                                         child: IconButton(
                                             onPressed: () {
                                               showSearch(
@@ -550,7 +550,7 @@ class _PlacesState extends State<Places> with SingleTickerProviderStateMixin {
                               ),
                             ))),
                     _places.isEmpty
-                        ? Expanded(
+                        ? const Expanded(
                             child: Align(
                               alignment: Alignment.center,
                               child: Text("Save some nice place"),
@@ -570,7 +570,7 @@ class _PlacesState extends State<Places> with SingleTickerProviderStateMixin {
                                           bottom: MediaQuery.of(context).size.height *
                                               0.08),
                                       gridDelegate:
-                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                          const SliverGridDelegateWithFixedCrossAxisCount(
                                               crossAxisSpacing: 0,
                                               mainAxisSpacing: 0,
                                               crossAxisCount: 2,
@@ -580,18 +580,18 @@ class _PlacesState extends State<Places> with SingleTickerProviderStateMixin {
                                               (placeProvider.tagPreserver ==
                                                   true)
                                           ? Padding(
-                                              padding: EdgeInsets.only(
+                                              padding: const EdgeInsets.only(
                                                   left: 5,
                                                   right: 5,
                                                   bottom: 10),
                                               child: PlacesGrid(searchTag[index], index, tagPlace))
                                           : textEditingController.text.isEmpty && (placeProvider.tagPreserver == true)
-                                              ? Padding(padding: EdgeInsets.only(left: 5, right: 5, bottom: 10), child: PlacesGrid(tagPlace[index], index, tagPlace))
+                                              ? Padding(padding: const EdgeInsets.only(left: 5, right: 5, bottom: 10), child: PlacesGrid(tagPlace[index], index, tagPlace))
                                               : textEditingController.text.isNotEmpty && (placeProvider.tagPreserver == false)
-                                                  ? Padding(padding: EdgeInsets.only(left: 5, right: 5, bottom: 10), child: PlacesGrid(searchPlace[index], index, tagPlace))
+                                                  ? Padding(padding: const EdgeInsets.only(left: 5, right: 5, bottom: 10), child: PlacesGrid(searchPlace[index], index, tagPlace))
                                                   : placeProvider.tagPreserver == false
-                                                      ? Padding(padding: EdgeInsets.only(left: 5, right: 5, bottom: 10), child: PlacesGrid(_places[index], index, tagPlace))
-                                                      : Padding(padding: EdgeInsets.only(left: 5, right: 5, bottom: 10), child: PlacesGrid(tagPlace[index], index, tagPlace)),
+                                                      ? Padding(padding: const EdgeInsets.only(left: 5, right: 5, bottom: 10), child: PlacesGrid(_places[index], index, tagPlace))
+                                                      : Padding(padding: const EdgeInsets.only(left: 5, right: 5, bottom: 10), child: PlacesGrid(tagPlace[index], index, tagPlace)),
                                       itemCount: textEditingController.text.isNotEmpty && placeProvider.tagPreserver
                                           ? searchTag.length
                                           : textEditingController.text.isEmpty && placeProvider.tagPreserver
@@ -651,20 +651,20 @@ class PlaceSearch extends SearchDelegate<String> {
         isTapped = !isTapped;
         close(context, "");
       },
-      icon: Icon(Icons.arrow_back));
+      icon: const Icon(Icons.arrow_back));
   @override
   Widget buildResults(
     BuildContext context,
   ) =>
       GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisSpacing: 10,
               mainAxisSpacing: 0,
               crossAxisCount: 2,
               childAspectRatio: 2.2 / 3),
           itemBuilder: (context, index) {
             return Padding(
-                padding: EdgeInsets.only(left: 5, right: 5, bottom: 5, top: 5),
+                padding: const EdgeInsets.only(left: 5, right: 5, bottom: 5, top: 5),
                 child: SearchGrid(
                     searchedItem[index], index, searchedItem, searchedItem));
           },
@@ -703,14 +703,14 @@ class PlaceSearch extends SearchDelegate<String> {
             title: RichText(
               text: TextSpan(
                   text: quaryText,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
                       fontSize: 18),
                   children: [
                     TextSpan(
                         text: remainingText,
-                        style: TextStyle(color: Colors.grey, fontSize: 18))
+                        style: const TextStyle(color: Colors.grey, fontSize: 18))
                   ]),
             ));
       }));

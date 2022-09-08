@@ -1,27 +1,15 @@
-import 'dart:async';
-import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:places/screens/detail_place.dart';
-import 'package:places/screens/places.dart';
 import 'dart:io';
+import 'dart:ui' as ui;
 
+//Screens
+import 'package:places/screens/detail_place.dart';
+
+//Dependencies
 import 'package:provider/provider.dart';
 import '../providers/places_provider.dart';
 import '../models/place.dart';
-
-//Hive
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-
-import 'package:path/path.dart' as path;
-import 'package:path_provider/path_provider.dart' as sysPath;
-
-import 'package:image_picker/image_picker.dart';
-
 import 'package:fluttertoast/fluttertoast.dart';
-import '../widgets/Toast.dart';
-import '../screens/update_map_screen.dart';
 
 // ignore: must_be_immutable
 class SearchGrid extends StatefulWidget {
@@ -39,20 +27,8 @@ class SearchGrid extends StatefulWidget {
 
 class _PlacesGridState extends State<SearchGrid> with TickerProviderStateMixin {
   bool isTap = false;
-  File? _storedImage;
+
   late FToast ftoast;
-
-  late AnimationController _controllerAddPhotoButton;
-  late AnimationController _controllerDeletePhotoButton;
-  late AnimationController _controllerUpdateMapButton;
-  late AnimationController _controllerShowPlaceButton;
-  late AnimationController _opacityController;
-
-  late Animation<Offset> _slideAnimationButtonDelete;
-  late Animation<Offset> _slideAnimationButtonAdd;
-  late Animation<Offset> _slideAnimationButtonShow;
-  late Animation<Offset> _slideAnimationButtonMap;
-  late Animation<double> _opacityAnimation;
 
   List<Icon> list = [Icon(Icons.add), Icon(Icons.add)];
 
@@ -74,7 +50,7 @@ class _PlacesGridState extends State<SearchGrid> with TickerProviderStateMixin {
         footer: Padding(
           padding: const EdgeInsets.all(12),
           child: AnimatedDefaultTextStyle(
-            style: TextStyle(fontSize: isTap ? 30 : 20, color: Colors.white),
+            style: const TextStyle(fontSize: 20, color: Colors.white),
             duration: Duration(milliseconds: 2000),
             child: Text(
               widget._places.title,

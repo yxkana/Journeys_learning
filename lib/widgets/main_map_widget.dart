@@ -1,18 +1,15 @@
 import 'dart:async';
-import 'dart:typed_data';
-
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:path/path.dart';
-
-import 'package:places/models/place.dart';
-import 'package:places/screens/detail_place.dart';
 import 'dart:io';
 import 'dart:ui' as ui;
-import 'dart:convert';
+
+//Screens
+import 'package:places/screens/detail_place.dart';
+//Models
+import 'package:places/models/place.dart';
+//Dependencies
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class mainMap extends StatefulWidget {
   List<Place> searchMap;
@@ -61,7 +58,6 @@ class _mainMapState extends State<mainMap> {
 
     return fi.image;
   }
-  
 
   //----------------------------------------------------------------------------
   //Create bluePrint for marker with Img
@@ -192,7 +188,8 @@ class _mainMapState extends State<mainMap> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => Detail_screen(element.id,element)));
+                          builder: (context) =>
+                              Detail_screen(element.id, element)));
                 },
                 snippet: "Click to Gallery"),
             icon: BitmapDescriptor.fromBytes(markerIcon),
@@ -223,7 +220,8 @@ class _mainMapState extends State<mainMap> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => Detail_screen(element.id,element)));
+                          builder: (context) =>
+                              Detail_screen(element.id, element)));
                 })),
             icon: BitmapDescriptor.fromBytes(markerIcon),
             markerId: MarkerId(element.location!.idLoc),
@@ -238,11 +236,11 @@ class _mainMapState extends State<mainMap> {
   @override
   void initState() {
     // TODO: implement initState
-    
+
     super.initState();
-    
+
     searchPlace.addAll(widget.marker);
-    timer = Timer(Duration(milliseconds: 200), (() {}));
+    timer = Timer(const Duration(milliseconds: 200), (() {}));
   }
 
   @override
@@ -295,7 +293,7 @@ class _mainMapState extends State<mainMap> {
                             context: context,
                             delegate: PlaceSearch(searchPlace, _controller));
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.search,
                         size: 35,
                       )))),
@@ -316,10 +314,10 @@ class _mainMapState extends State<mainMap> {
                         });
                       },
                       icon: switchMarkers
-                          ? Icon(
+                          ? const Icon(
                               Icons.photo_camera_back_outlined,
                             )
-                          : Icon(Icons.pin_drop_outlined)))),
+                          : const Icon(Icons.pin_drop_outlined)))),
         ],
       ),
     ]);
@@ -348,7 +346,7 @@ class PlaceSearch extends SearchDelegate<String> {
                 query = "";
               }
             },
-            icon: Icon(Icons.clear))
+            icon: const Icon(Icons.clear))
       ];
   @override
   Widget buildLeading(BuildContext context) => IconButton(
@@ -390,14 +388,15 @@ class PlaceSearch extends SearchDelegate<String> {
             title: RichText(
               text: TextSpan(
                   text: quaryText,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
                       fontSize: 18),
                   children: [
                     TextSpan(
                         text: remainingText,
-                        style: TextStyle(color: Colors.grey, fontSize: 18))
+                        style:
+                            const TextStyle(color: Colors.grey, fontSize: 18))
                   ]),
             ));
       }));

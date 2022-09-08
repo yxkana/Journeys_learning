@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+
+//models
 import '../models/tag_model.dart';
+import '../models/place.dart';
+
+//data
 import '../data/tag_data.dart';
+
+//dependenices
 import '../providers/places_provider.dart';
 import 'package:provider/provider.dart';
-import '../screens/detail_place.dart';
 
-import '../models/place.dart';
+
 
 class updatetTag extends StatefulWidget {
   final Map<String, bool> tagMap;
@@ -149,7 +155,7 @@ class _updatetTagState extends State<updatetTag> {
                         Navigator.pop(context);
                       });
                     },
-                    child: Text("Save"))
+                    child:const Text("Save"))
               ],
             ),
           ),

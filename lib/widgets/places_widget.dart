@@ -1,27 +1,24 @@
-import 'dart:async';
-import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:places/screens/detail_place.dart';
-import 'package:places/screens/places.dart';
 import 'dart:io';
 
-import 'package:provider/provider.dart';
-import '../providers/places_provider.dart';
+//Screens
+import '../screens/update_map_screen.dart';
+//Models
 import '../models/place.dart';
 
-//Hive
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-
+//Dependencies
+import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart' as sysPath;
-
-import 'package:image_picker/image_picker.dart';
-
+import 'package:provider/provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:places/screens/detail_place.dart';
+
+//widgets
 import '../widgets/Toast.dart';
-import '../screens/update_map_screen.dart';
+
+//Provider
+import '../providers/places_provider.dart';
 
 // ignore: must_be_immutable
 class PlacesGrid extends StatefulWidget {
@@ -149,7 +146,7 @@ class _PlacesGridState extends State<PlacesGrid> with TickerProviderStateMixin {
                 style: TextStyle(
                     fontSize: isTap ? 25 : 20,
                     color: Theme.of(context).colorScheme.tertiary),
-                duration: Duration(milliseconds: 2000),
+                duration:const Duration(milliseconds: 2000),
                 child: Text(
                   widget._places.title,
                 ),
@@ -157,7 +154,7 @@ class _PlacesGridState extends State<PlacesGrid> with TickerProviderStateMixin {
             ),
             header: isTap
                 ? Padding(
-                    padding: EdgeInsets.all(7),
+                    padding: const EdgeInsets.all(7),
                     child: Align(
                       alignment: Alignment.topRight,
                       child: Column(
@@ -165,14 +162,14 @@ class _PlacesGridState extends State<PlacesGrid> with TickerProviderStateMixin {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           AnimatedContainer(
-                            duration: Duration(milliseconds: 200),
+                            duration:const Duration(milliseconds: 200),
                             child: FadeTransition(
                               opacity: _opacityAnimation,
                               child: SlideTransition(
                                 position: _slideAnimationButtonShow,
                                 child: IconButton(
                                     onPressed: () {
-                                      print(widget._places.tagsOfPlaces);
+                                     
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
@@ -192,7 +189,7 @@ class _PlacesGridState extends State<PlacesGrid> with TickerProviderStateMixin {
                             ),
                           ),
                           AnimatedContainer(
-                            duration: Duration(milliseconds: 200),
+                            duration:const Duration(milliseconds: 200),
                             child: FadeTransition(
                               opacity: _opacityAnimation,
                               child: SlideTransition(
@@ -219,7 +216,7 @@ class _PlacesGridState extends State<PlacesGrid> with TickerProviderStateMixin {
                             ),
                           ),
                           AnimatedContainer(
-                            duration: Duration(milliseconds: 200),
+                            duration:const Duration(milliseconds: 200),
                             child: FadeTransition(
                               opacity: _opacityAnimation,
                               child: SlideTransition(
@@ -279,7 +276,7 @@ class _PlacesGridState extends State<PlacesGrid> with TickerProviderStateMixin {
                             ),
                           ),
                           AnimatedContainer(
-                            duration: Duration(milliseconds: 200),
+                            duration: const Duration(milliseconds: 200),
                             child: FadeTransition(
                               opacity: _opacityAnimation,
                               child: SlideTransition(
@@ -290,7 +287,7 @@ class _PlacesGridState extends State<PlacesGrid> with TickerProviderStateMixin {
                                         showDialog(
                                             context: context,
                                             builder: (ctx) => AlertDialog(
-                                                  content: Text(
+                                                  content: const Text(
                                                       "Do you want to remove this Place ?"),
                                                   actions: [
                                                     TextButton(
@@ -311,20 +308,20 @@ class _PlacesGridState extends State<PlacesGrid> with TickerProviderStateMixin {
                                                               child:
                                                                   JourneyDeleted,
                                                               toastDuration:
-                                                                  Duration(
+                                                                  const Duration(
                                                                       seconds:
                                                                           1),
                                                               gravity:
                                                                   ToastGravity
                                                                       .CENTER);
                                                         }),
-                                                        child: Text("Yes")),
+                                                        child:const Text("Yes")),
                                                     TextButton(
                                                         onPressed: (() =>
                                                             Navigator.of(
                                                                     context)
                                                                 .pop()),
-                                                        child: Text("No"))
+                                                        child:const Text("No"))
                                                   ],
                                                 ));
                                       });

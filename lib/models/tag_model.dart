@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../models/place.dart';
 
 class TagData {
   final String label;

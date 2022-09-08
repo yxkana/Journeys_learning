@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter/material.dart';
-import 'package:path/path.dart';
-
 class CustomPageRoute extends PageRouteBuilder {
   final Widget child;
   final AxisDirection direction;
 
   CustomPageRoute({required this.child, this.direction = AxisDirection.right})
       : super(
-            transitionDuration: Duration(seconds: 1),
+            transitionDuration: const Duration(seconds: 1),
             pageBuilder: (context, animatin, secondaryAnimation) => child);
 
   @override

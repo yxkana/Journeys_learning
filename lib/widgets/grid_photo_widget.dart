@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import '../models/place.dart';
 import 'dart:io';
+//Models
+import '../models/place.dart';
+//Screen
 import '../screens/dipley_photo.dart';
 
 class Photo_grid extends StatefulWidget {
@@ -34,14 +36,14 @@ class _Photo_gridState extends State<Photo_grid> {
   Widget build(BuildContext context) {
     isDeleteActive();
     final gridPlace = widget._place.gallery[widget._index];
-    final tag = new StringBuffer();
+    final tag =  StringBuffer();
     tag.writeAll([widget._place.id, widget._index]);
     return Hero(
         tag: widget._index == 0
             ? gridPlace + widget._place.id + widget._index.toString()
             : widget._place.id + widget._index.toString(),
         child: Padding(
-          padding: EdgeInsets.only(left: 5, right: 5, bottom: 5),
+          padding:const EdgeInsets.only(left: 5, right: 5, bottom: 5),
           child: GestureDetector(
             onLongPress: () {
               if (widget._listOfDeletedItems.contains(gridPlace)) {
@@ -56,7 +58,7 @@ class _Photo_gridState extends State<Photo_grid> {
             },
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: ((context) {
-                return displeyd_photo(widget._place.gallery, widget._place.id,
+                return Displeyd_photo(widget._place.gallery, widget._place.id,
                     widget._index, gridPlace, widget._place, widget._function);
               })));
             },
@@ -85,7 +87,7 @@ class _Photo_gridState extends State<Photo_grid> {
                   ),
                 ),
                 _isPressed == true
-                    ? Padding(
+                    ?const Padding(
                         padding: EdgeInsets.all(3),
                         child: Align(
                             alignment: Alignment.topRight,

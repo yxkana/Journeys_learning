@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
-import './helpers/custom_slider_right.dart';
+//screens
 import './screens/places.dart';
 import './screens/map.dart';
 
-
-
-import 'package:animations/animations.dart';
+//widgets
 import './widgets/add_place_new.dart';
+
+//dependencies
+import 'package:animations/animations.dart';
 import 'package:location/location.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -22,8 +23,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   bool tab0 = true;
   bool tab1 = true;
-  bool tab2 = true;
-  bool tab3 = true;
 
   late AnimationController _controller0;
   late AnimationController _controller1;
@@ -98,54 +97,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       setState(() {
         offset = Offset(-1.5, 0);
       });
-    } else if (currentTab == 2 && _preveusTab == 0) {
-      setState(() {
-        offset = Offset(-1.5, 0);
-      });
-    } else if (currentTab == 3 && _preveusTab == 0) {
-      setState(() {
-        offset = Offset(-1.5, 0);
-      });
     }
+
     if (currentTab == 0 && _preveusTab == 1) {
       setState(() {
         offset = Offset(1.5, 0);
-      });
-    } else if (currentTab == 0 && _preveusTab == 2) {
-      setState(() {
-        offset = Offset(1.5, 0);
-      });
-    } else if (currentTab == 0 && _preveusTab == 3) {
-      setState(() {
-        offset = Offset(1.5, 0);
-      });
-    }
-    if (currentTab == 1 && _preveusTab == 2) {
-      setState(() {
-        offset = Offset(1.5, 0);
-      });
-    } else if (currentTab == 1 && _preveusTab == 3) {
-      setState(() {
-        offset = Offset(1.5, 0);
-      });
-    }
-    if (currentTab == 2 && _preveusTab == 3) {
-      setState(() {
-        offset = Offset(1.5, 0);
-      });
-    } else if (currentTab == 2 && _preveusTab == 1) {
-      setState(() {
-        offset = Offset(-1.5, 0);
-      });
-    }
-    if (currentTab == 3 && _preveusTab == 1) {
-      setState(() {
-        offset = Offset(1.5, 0);
-      });
-    }
-    if (currentTab == 3 && _preveusTab == 2) {
-      setState(() {
-        offset = Offset(-1.5, 0);
       });
     }
   }
@@ -192,7 +148,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       extendBody: true,
       backgroundColor: Theme.of(context).backgroundColor,
       body: PageTransitionSwitcher(
-          duration: Duration(milliseconds: 270),
+          duration:const Duration(milliseconds: 270),
           transitionBuilder: ((child, primaryAnimation, secondaryAnimation) =>
               SlideTransition(
                 position: Tween<Offset>(begin: offset, end: Offset.zero)
@@ -367,7 +323,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ]),
         ),
       ),
-      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

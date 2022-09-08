@@ -1,30 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'dart:io';
+import '../helpers/button_hero_transition.dart';
+
+//Home
 import 'package:places/home.dart';
+
+//Dependencies
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:path_provider/path_provider.dart' as sysPath;
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart' as path;
+
+//Widgets
+import '../widgets/updateTag_widget.dart';
+import '../widgets/grid_photo_widget.dart';
+
+//Screens
+import './update_map_screen.dart';
+
+//Providers
 import 'package:places/providers/places_provider.dart';
 import 'package:places/widgets/toast.dart';
 import 'package:provider/provider.dart';
-import 'dart:io';
 import '../widgets/Boxes.dart';
 import '../models/place.dart';
-import '../helpers/button_hero_transition.dart';
-import '../helpers/tween_helper.dart';
-import '../screens/dipley_photo.dart';
-import '../screens/places.dart';
-import './update_map_screen.dart';
-import '../models/tag_model.dart';
-import '../data/tag_data.dart';
-import '../widgets/updateTag_widget.dart';
-import '../widgets/grid_photo_widget.dart';
-//Image File
-import 'package:path/path.dart' as path;
-import 'package:path_provider/path_provider.dart' as sysPath;
-import 'package:image_picker/image_picker.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class Detail_screen extends StatefulWidget {
   static const routeName = "/detail-screen";
@@ -60,8 +59,8 @@ class _Detail_screenState extends State<Detail_screen>
     ftoast = FToast();
     ftoast.init(context);
     _controller.text = widget.place.title;
-    _controllerDeleteAppBar =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 150));
+    _controllerDeleteAppBar = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 150));
     _slideAnimationDeleteAppBar =
         Tween<Offset>(begin: Offset(0, 1), end: Offset(0, 0)).animate(
             CurvedAnimation(
@@ -103,7 +102,7 @@ class _Detail_screenState extends State<Detail_screen>
     final List<PopupMenuEntry> popUpmenuList = [
       PopupMenuItem(
           child: ListTile(
-        title: Text("Take Photo"),
+        title: const Text("Take Photo"),
         onTap: () async {
           final picker = ImagePicker();
           Navigator.pop(context);
@@ -127,7 +126,7 @@ class _Detail_screenState extends State<Detail_screen>
       )),
       PopupMenuItem(
           child: ListTile(
-        title: Text("Add Photo"),
+        title: const Text("Add Photo"),
         onTap: () async {
           final picker = ImagePicker();
           Navigator.pop(context);
@@ -156,13 +155,13 @@ class _Detail_screenState extends State<Detail_screen>
       )),
       PopupMenuItem(
           child: ListTile(
-        title: Text("Delete"),
+        title: const Text("Delete"),
         onTap: () async {
           Navigator.pop(context);
           showDialog(
               context: context,
               builder: (ctx) => AlertDialog(
-                    content: Text("Do you want to remove this Place ?"),
+                    content: const Text("Do you want to remove this Place ?"),
                     actions: [
                       TextButton(
                           onPressed: (() async {
@@ -178,17 +177,17 @@ class _Detail_screenState extends State<Detail_screen>
                                 gravity: ToastGravity.CENTER,
                                 toastDuration: Duration(seconds: 1));
                           }),
-                          child: Text("Yes")),
+                          child: const Text("Yes")),
                       TextButton(
                           onPressed: (() => Navigator.of(context).pop()),
-                          child: Text("No"))
+                          child: const Text("No"))
                     ],
                   ));
         },
       )),
       PopupMenuItem(
           child: ListTile(
-        title: Text("Update map"),
+        title: const Text("Update map"),
         onTap: () async {
           Navigator.pop(context);
           Navigator.of(context).push(MaterialPageRoute(
@@ -198,7 +197,7 @@ class _Detail_screenState extends State<Detail_screen>
       )),
       PopupMenuItem(
           child: ListTile(
-        title: Text("Change name"),
+        title: const Text("Change name"),
         onTap: () {
           Navigator.pop(context);
           showModalBottomSheet(
@@ -212,7 +211,7 @@ class _Detail_screenState extends State<Detail_screen>
                   child: Container(
                     decoration: BoxDecoration(
                         color: Theme.of(context).colorScheme.secondary,
-                        borderRadius: BorderRadius.only(
+                        borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(30),
                             topRight: Radius.circular(30))),
                     child: Column(
@@ -229,7 +228,7 @@ class _Detail_screenState extends State<Detail_screen>
                               fontWeight: FontWeight.bold),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(
+                          padding: const EdgeInsets.only(
                             top: 20,
                             left: 40,
                             right: 40,
@@ -248,7 +247,7 @@ class _Detail_screenState extends State<Detail_screen>
                                   color: Theme.of(context).colorScheme.primary,
                                   fontSize: 20),
                               controller: _controller,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 enabledBorder: InputBorder.none,
                                 focusedBorder: InputBorder.none,
                                 contentPadding: EdgeInsets.only(left: 20),
@@ -272,7 +271,7 @@ class _Detail_screenState extends State<Detail_screen>
                                     onPressed: () {
                                       Navigator.pop(context);
                                     },
-                                    child: Text("Back"),
+                                    child: const Text("Back"),
                                     style: ElevatedButton.styleFrom(
                                         minimumSize: Size(140, 45),
                                         shape: RoundedRectangleBorder(
@@ -290,9 +289,9 @@ class _Detail_screenState extends State<Detail_screen>
                                     });
                                     Navigator.pop(context);
                                   },
-                                  child: Text("Change"),
+                                  child: const Text("Change"),
                                   style: ElevatedButton.styleFrom(
-                                      minimumSize: Size(140, 45),
+                                      minimumSize: const Size(140, 45),
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadiusDirectional.circular(
@@ -316,13 +315,13 @@ class _Detail_screenState extends State<Detail_screen>
       bottomNavigationBar: SlideTransition(
         position: _slideAnimationDeleteAppBar,
         child: ClipRRect(
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(20), topRight: Radius.circular(20)),
           child: BottomAppBar(
             child: Container(
               height: MediaQuery.of(context).size.height * 0.12,
               child: Padding(
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -338,7 +337,7 @@ class _Detail_screenState extends State<Detail_screen>
                               context: context,
                               builder: ((context) {
                                 return AlertDialog(
-                                  content: Text("Are you sure"),
+                                  content: const Text("Are you sure"),
                                   actions: [
                                     TextButton(
                                         onPressed: (() async {
@@ -354,11 +353,11 @@ class _Detail_screenState extends State<Detail_screen>
                                           });
                                           Navigator.pop(context);
                                         }),
-                                        child: Text("Yes")),
+                                        child: const Text("Yes")),
                                     TextButton(
                                         onPressed: (() =>
                                             Navigator.of(context).pop()),
-                                        child: Text("No"))
+                                        child: const Text("No"))
                                   ],
                                 );
                               }));
@@ -375,7 +374,7 @@ class _Detail_screenState extends State<Detail_screen>
           ),
         ),
       ),
-      backgroundColor: Color.fromARGB(255, 175, 197, 226),
+      backgroundColor: const Color.fromARGB(255, 175, 197, 226),
       body: Column(
         children: [
           SizedBox(
@@ -422,7 +421,7 @@ class _Detail_screenState extends State<Detail_screen>
                           listForDeletion.clear();
                         });
                       },
-                      icon: Icon(Icons.close),
+                      icon: const Icon(Icons.close),
                       iconSize: 30,
                       color: Theme.of(context).colorScheme.primary,
                     ),
@@ -441,7 +440,7 @@ class _Detail_screenState extends State<Detail_screen>
           Row(
             children: [
               Padding(
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                     left: 10,
                   ),
                   child: Text(
@@ -465,8 +464,9 @@ class _Detail_screenState extends State<Detail_screen>
                     child: GridView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount: _places.listIcons.length + 1,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            mainAxisExtent: 40, crossAxisCount: 1),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                mainAxisExtent: 40, crossAxisCount: 1),
                         itemBuilder: ((context, index) {
                           if (index < _places.listIcons.length) {
                             return Padding(
@@ -519,21 +519,22 @@ class _Detail_screenState extends State<Detail_screen>
           ),
           Expanded(
             child: ClipRRect(
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(20), topRight: Radius.circular(20)),
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 5),
+                padding: const EdgeInsets.symmetric(horizontal: 5),
                 child: Container(
                   color: Theme.of(context).colorScheme.secondary,
                   child: GridView.builder(
                       itemCount: _places.gallery.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 4,
-                          crossAxisSpacing: 0,
-                          mainAxisSpacing: 0),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 4,
+                              crossAxisSpacing: 0,
+                              mainAxisSpacing: 0),
                       itemBuilder: (context, index) {
                         final gridPlace = _places.gallery[index];
-                        final tag = new StringBuffer();
+                        final tag = StringBuffer();
                         tag.writeAll([widget.id, index]);
                         int number = 0;
 

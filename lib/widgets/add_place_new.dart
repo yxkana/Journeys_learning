@@ -1,44 +1,32 @@
-import 'dart:collection';
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
-import 'package:places/home.dart';
-
-import 'package:places/models/place.dart';
-
-import '../models/tag_model.dart';
-import '../data/tag_data.dart';
 import 'dart:io';
 
-//Imports Widgets
-import '../widgets/image_input.dart';
+//Dependencies
 import 'package:provider/provider.dart';
-import '../providers/places_provider.dart';
-import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
-import '../widgets/Toast.dart';
-
-//google Maps
-import 'package:location/location.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-//map helper
-import '../helpers/location_helper.dart';
-
-//Stepper packages
-import 'package:im_stepper/main.dart';
 import 'package:im_stepper/stepper.dart';
-
-//Carousel packagess
-import 'package:carousel_slider/carousel_slider.dart';
-
-//Image File
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart' as sysPath;
 import 'package:image_picker/image_picker.dart';
-
-import 'package:carousel_slider/carousel_slider.dart';
-//Id generator
 import 'package:uuid/uuid.dart';
+
+//Data
+import '../data/tag_data.dart';
+
+//Providers
+import '../providers/places_provider.dart';
+
+//Models
+import 'package:places/home.dart';
+import 'package:places/models/place.dart';
+import '../models/tag_model.dart';
+
+//Widgets
+import '../widgets/Toast.dart';
+
+//map helper
+import '../helpers/location_helper.dart';
 
 class Add_new_Place extends StatefulWidget {
   final double latitude;
@@ -208,7 +196,7 @@ class _Add_new_PlaceState extends State<Add_new_Place> {
           children: [
             IconStepper(
               stepReachedAnimationEffect: Curves.easeIn,
-              stepReachedAnimationDuration: Duration(milliseconds: 200),
+              stepReachedAnimationDuration: const Duration(milliseconds: 200),
               activeStepBorderColor: Colors.transparent,
               lineDotRadius: 2,
               lineColor: Theme.of(context).colorScheme.primary,
@@ -282,13 +270,13 @@ class _Add_new_PlaceState extends State<Add_new_Place> {
       //Pictures
       case 1:
         return Padding(
-          padding: EdgeInsets.only(top: 10, left: 10, right: 10),
+          padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
           child: Container(
             height: MediaQuery.of(context).size.height * 0.447,
             width: double.infinity,
             child: GridView.builder(
                 itemCount: _gallery.length + 2,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 4,
                     childAspectRatio: 3 / 3,
                     crossAxisSpacing: 5,
@@ -335,7 +323,8 @@ class _Add_new_PlaceState extends State<Add_new_Place> {
                             )
                           : index == 1
                               ? SizedBox.fromSize(
-                                  size: Size(70, 70), // button width and height
+                                  size: const Size(
+                                      70, 70), // button width and height
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(10),
                                     child: Material(
@@ -454,7 +443,7 @@ class _Add_new_PlaceState extends State<Add_new_Place> {
                                     child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
-                                      children: [
+                                      children: const [
                                         Icon(
                                           Icons.camera_alt_outlined,
                                           color:
@@ -544,7 +533,7 @@ class _Add_new_PlaceState extends State<Add_new_Place> {
                               height: 20,
                               width: 200,
                               child: GridView.builder(
-                                  physics: NeverScrollableScrollPhysics(),
+                                  physics: const NeverScrollableScrollPhysics(),
                                   addRepaintBoundaries: true,
                                   gridDelegate:
                                       SliverGridDelegateWithFixedCrossAxisCount(
@@ -591,7 +580,7 @@ class _Add_new_PlaceState extends State<Add_new_Place> {
                 ],
               ),
               Padding(
-                padding: EdgeInsets.only(top: 15),
+                padding: const EdgeInsets.only(top: 15),
                 child: Align(
                   alignment: Alignment.center,
                   child: Container(
@@ -632,7 +621,6 @@ class _Add_new_PlaceState extends State<Add_new_Place> {
                               newPosition.latitude == 0 ||
                               newPosition.longitude == 0 ||
                               iconList.isEmpty) {
-                            print("sda");
                             ftoast.showToast(
                                 child: somethingGotWrong,
                                 gravity: ToastGravity.TOP,
@@ -661,11 +649,11 @@ class _Add_new_PlaceState extends State<Add_new_Place> {
                               gravity: ToastGravity.CENTER,
                               toastDuration: Duration(seconds: 1));
                         }),
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.location_city_outlined,
                           color: Color.fromRGBO(211, 206, 223, 1),
                         ),
-                        label: Text(
+                        label: const Text(
                           "Add a place",
                           style: TextStyle(
                               color: Color.fromRGBO(211, 206, 223, 1)),
@@ -681,7 +669,7 @@ class _Add_new_PlaceState extends State<Add_new_Place> {
         return Column(
           children: [
             Padding(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: TextField(
                 onSubmitted: ((value) {
                   FocusScope.of(context).unfocus();
@@ -702,7 +690,7 @@ class _Add_new_PlaceState extends State<Add_new_Place> {
                       borderSide:
                           BorderSide(color: Color.fromRGBO(156, 180, 204, 1))),
                   counterStyle:
-                      const TextStyle(color: Color.fromRGBO(116, 141, 166, 1)),
+                      TextStyle(color: Color.fromRGBO(116, 141, 166, 1)),
                   hintText: "Journey and Tag",
                   hintStyle: TextStyle(
                       color: Color.fromRGBO(116, 141, 166, 1),

@@ -1,18 +1,16 @@
-import 'dart:typed_data';
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:places/screens/map.dart';
-import 'package:places/widgets/toast.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:location/location.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+//Screens
+import 'package:places/widgets/toast.dart';
+
+//Models
 import 'package:places/models/place.dart';
 
+//Dependencies
 import 'package:provider/provider.dart';
 import 'package:places/providers/places_provider.dart';
-
-//AIzaSyCi7dFt4IfqxQ7v9umJCKBHE-e_mIEKle8
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Updatemap extends StatefulWidget {
   double latitude;
@@ -60,7 +58,7 @@ class _UpdatemapState extends State<Updatemap> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("Map")),
+        appBar: AppBar(title: Text(widget.place.title)),
         body: SizedBox.expand(
           child: Container(
               child: Stack(
@@ -72,7 +70,8 @@ class _UpdatemapState extends State<Updatemap> {
                 ),
                 onTap: _selectLocation,
                 markers: {
-                  Marker(markerId: MarkerId("m1"), position: _pickedLocation)
+                  Marker(
+                      markerId: const MarkerId("m1"), position: _pickedLocation)
                 },
               ),
             ],
@@ -91,7 +90,7 @@ class _UpdatemapState extends State<Updatemap> {
                 ftoast.showToast(
                     child: toastMapUpdated,
                     gravity: ToastGravity.CENTER,
-                    toastDuration: Duration(seconds: 1));
+                    toastDuration: const Duration(seconds: 1));
               }),
               child: FittedBox(
                 fit: BoxFit.fitWidth,
@@ -108,7 +107,7 @@ class _UpdatemapState extends State<Updatemap> {
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.015,
                     ),
-                    Icon(
+                    const Icon(
                       Icons.add_location_alt_rounded,
                       color: Color.fromRGBO(244, 238, 255, 1),
                     )

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'dart:io';
+//Dependencies
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart' as sysPath;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import './Toast.dart';
+
 
 class ImageInput extends StatefulWidget {
   final Function onSelectImage;
@@ -149,7 +150,7 @@ class _ImageInputState extends State<ImageInput> {
                     ),
                     label: Text(
                       isMap ? "Add point" : "Photo",
-                      style: TextStyle(
+                      style:const TextStyle(
                           fontFamily: "NexaTextBook",
                           color: Color.fromRGBO(244, 238, 255, 1)),
                     ),
@@ -179,7 +180,7 @@ class _ImageInputState extends State<ImageInput> {
                       ),
                       label: Text(
                         isMap ? "Gallery" : "Map",
-                        style: TextStyle(
+                        style:const TextStyle(
                           color: Color.fromRGBO(244, 238, 255, 1),
                           fontWeight: FontWeight.normal,
                           fontFamily: "NexaTextBook",

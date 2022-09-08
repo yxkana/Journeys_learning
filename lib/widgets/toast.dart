@@ -4,11 +4,11 @@ Widget toastPhotoAdded = Container(
   padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
   decoration: BoxDecoration(
     borderRadius: BorderRadius.circular(25.0),
-    color: Color.fromRGBO(156, 180, 204, 1),
+    color: const Color.fromRGBO(156, 180, 204, 1),
   ),
   child: Row(
     mainAxisSize: MainAxisSize.min,
-    children: [
+    children: const [
       Icon(
         Icons.check,
         color: Colors.white,
@@ -27,11 +27,11 @@ Widget toastJourneyAdded = Container(
   padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
   decoration: BoxDecoration(
     borderRadius: BorderRadius.circular(25.0),
-    color: Color.fromRGBO(156, 180, 204, 1),
+    color: const Color.fromRGBO(156, 180, 204, 1),
   ),
   child: Row(
     mainAxisSize: MainAxisSize.min,
-    children: [
+    children: const [
       Icon(
         Icons.check,
         color: Colors.white,
@@ -52,11 +52,11 @@ Widget toastMapUpdated = Container(
   padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
   decoration: BoxDecoration(
     borderRadius: BorderRadius.circular(25.0),
-    color: Color.fromRGBO(156, 180, 204, 1),
+    color: const Color.fromRGBO(156, 180, 204, 1),
   ),
   child: Row(
     mainAxisSize: MainAxisSize.min,
-    children: [
+    children: const [
       Icon(
         Icons.check,
         color: Colors.white,
@@ -77,11 +77,11 @@ Widget somethingGotWrong = Container(
   padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
   decoration: BoxDecoration(
     borderRadius: BorderRadius.circular(25.0),
-    color: Color.fromRGBO(156, 180, 204, 1),
+    color: const Color.fromRGBO(156, 180, 204, 1),
   ),
   child: Row(
     mainAxisSize: MainAxisSize.min,
-    children: [
+    children: const [
       Icon(
         Icons.error_outline_rounded,
         color: Colors.white,
@@ -102,11 +102,11 @@ Widget JourneyDeleted = Container(
   padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
   decoration: BoxDecoration(
     borderRadius: BorderRadius.circular(25.0),
-    color: Color.fromRGBO(156, 180, 204, 1),
+    color: const Color.fromRGBO(156, 180, 204, 1),
   ),
   child: Row(
     mainAxisSize: MainAxisSize.min,
-    children: [
+    children: const [
       Icon(
         Icons.error_outline_rounded,
         color: Colors.white,
